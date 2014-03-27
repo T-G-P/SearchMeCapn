@@ -58,7 +58,50 @@ int main(int argc, char **argv){
         return 0;
     }
     parse_file(argv[1]);
-    print_files(argv[1]);
+    /*char *query;
+      printf("Please input your query or multiple queries: \n");
+      scanf("%s", query);
+      printf("You entered: %s\n", query);
+      */
+    /*
+       char *str;
+
+    // Initial memory allocation
+    str = (char *) malloc(15);
+    printf("Please input your query or multiple queries: \n");
+    scanf("%s", str);
+
+    // Reallocating memory
+    str = (char *) realloc(str, strlen(str));
+    printf("You entered: %s\n", s);
+
+    free(str);
+    */
+    int quit = 0;
+    char* s;
+    do{
+        printf("Please input your query or multiple queries: \n");
+        s = calloc(1,sizeof(char));
+        char t;
+        int len;
+        while(scanf("%c", &t)==1)
+        {
+            if(t == '\n')
+                break;
+            len = strlen(s);
+            s= realloc(s,len+1);
+            *(s+len) = t;
+            *(s+len+1) = '\0';
+        }
+        if(strcmp(s,"q") == 0 || strcmp(s,"Q") == 0){
+            quit = 1;
+        }
+        printf("You entered: %s\n", s);
+    }while(!quit);
+
+
+    free(s);
+    //print_files(argv[1]);
     return 0;
 
 }

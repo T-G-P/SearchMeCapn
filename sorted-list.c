@@ -70,7 +70,7 @@ int SLInsert(SortedListPtr list, void *token, void*fileName)
     //we definitely are inserting something now, so we create a new node
     Node *newNode = createNode(token,fileName);
 
-    if(list->head == NULL || list->cf(list->head->fileName, fileName) < 0){
+    if(list->head == NULL || list->cf(list->head->fileName, fileName) > 0){
         newNode->next = list->head;     //Make the new node point to the current head
         list->head = newNode;           //Make the head the new node
         return 1;
@@ -83,7 +83,7 @@ int SLInsert(SortedListPtr list, void *token, void*fileName)
         if(list->cf(ptr->fileName, fileName) == 0){   //no duplicate insertion
             return 0;
         }
-        else if(list->cf(ptr->fileName, fileName) < 0){ //if fileName is bigger, insert
+        else if(list->cf(ptr->fileName, fileName) > 0){ //if fileName is bigger, insert
             Node *newNode = createNode(token, fileName);
             if(prev == NULL){       //the new object is bigger than the head
                 Node *temp = ptr;       //store head
@@ -95,7 +95,7 @@ int SLInsert(SortedListPtr list, void *token, void*fileName)
             newNode->refCount++;
             return 1;
         }
-        else if(list->cf(ptr->fileName, fileName) > 0){ //if fileName is smaller, keeping going
+        else if(list->cf(ptr->fileName, fileName) < 0){ //if fileName is smaller, keeping going
             prev = ptr;
             ptr = ptr->next;
         }

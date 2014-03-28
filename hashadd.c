@@ -60,11 +60,11 @@ void print_files() {
     struct hash *h;
     Node *ptr;
     for(h=tokenHash; h != NULL; h=(struct hash*)(h->hh.next)) {
-        printf("%s\n", h->token);  //print the token
+        printf("This is the token: %s\n", h->token);  //print the token
         ptr = h->list->head;  //points to hash node
         //sortList(ptr);
         while(ptr){     //while the pointer is not null
-            printf("%s\n", ptr->fileName); //then for each token print file names and count
+            printf("This is the file: %s\n", (char *)ptr->fileName); //then for each token print file names and count
             ptr = ptr->next;
         }
     }

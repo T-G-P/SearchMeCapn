@@ -11,5 +11,10 @@ make
 ./search <inverted index file>
 
 3)
-so <term1> <term2> <term3> etc.
-sa <term1> <term2> <term3> etc.
+so (term1) (term2) (term3) etc.
+
+or
+
+sa (term1) (term2) (term3) etc.
+
+4)Hit Q to quit

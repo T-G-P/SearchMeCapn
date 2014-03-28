@@ -1,0 +1,35 @@
+Eric Bronner
+Tobias Perelstein
+CS214 - Brian Russell
+Pa3 - Indexer 
+
+Testplan
+
+Test 0a: File/Directory to parse does not exist
+The second argument is a directory name that does not exist
+Expected Output: An alert explaining that the program failed
+Output: "File does not exist", program closes
+
+Test 0b: Too few command line arguments
+Expected Output: An alert explaining that the program failed
+Output: "Invalid number of arguments", followed by usage guide, program closes
+
+Test 1: Choosing not to overwrite
+The first argument, the file to write to, already exists, and the user choses not to overwrite.
+Expected Output: The program ends with a notice that it is not overwriting the file.
+Output: "This file will not be overwritten. Goodbye", program ends, file is not overwritten
+
+Test 2: Wordstat on one file
+The second argument, the file/directory to parse, is a single file and the file to write to is a new file
+Expected Output: A new file, "result" should be created, containing accurate stats for the input file
+Output: File result is create with the correct text
+
+Test 3: Directory crawling
+The second argument is a directory that contains a few files, some empty, and other directories with more files
+Expected Output: A new file, "result" is created, containing accurate stats for all words in the directory and subdirectories, with the empty file name never appearing
+Output: File result is create with the correct text from multiple files in multiple directories
+
+Test 4: Overwriting a file
+The first argument is the name of an existing file that the user will choose to overwrite
+Expected output: The input file's statistics should be written into the previously occupied file
+Output: result.txt from Test 2 has been wiped and replaced with a different file's information

@@ -13,8 +13,8 @@ struct Node_
     void *fileName;
     int refCount;
     struct Node_ *next;
-
-    };
+    int flag;
+};
 typedef struct Node_ Node;
 
 typedef int (*CompareFuncT)( void *, void * );

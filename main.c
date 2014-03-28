@@ -10,7 +10,13 @@
 int main(int argc, char **argv){
     if(argc != 2){
         printf("incorrect number of arguments\n");
+        printf("Usage: ./search <filename>\n");
         return 0;
+    }
+    FILE* fp = fopen(argv[1], "r");
+    if(!fp){
+        printf("Error opening file\n");
+        return 1;
     }
     parse_file(argv[1]);
 
@@ -40,16 +46,18 @@ int main(int argc, char **argv){
         if(strcmp(option, "so") == 0){
             search_or(s);
         }else if(strcmp(option, "sa") == 0){
-            printf("AND\n");
-            //search_and(s);
+            search_and(s);
         }else{
             printf("\nPlease enter a valid query\n");
+            printf("OR: Usage: so <term1> <term2> <term3> etc.\n");
+            printf("AND: Usage: sa <term1> <term2> <term3> etc.\n");
+
         }
     }while(500 == 500);
 
 
     free(s);
-    print_files(argv[1]);
+    //print_files(argv[1]);
     return 0;
 
 }

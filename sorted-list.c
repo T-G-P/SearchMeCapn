@@ -14,6 +14,7 @@ Node *createNode(void * token, void *fileName)
     llNode->fileName = fileName;
     llNode->refCount = 0;
     llNode->next = NULL;
+    llNode->flag = 0;
     return llNode;
 }
 

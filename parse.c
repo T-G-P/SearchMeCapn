@@ -6,8 +6,6 @@
 #include "sorted-list.h"
 #include "hashadd.h"
 
-int parse_file(char *);
-
 int parse_file(char *file_name){
     FILE *fp = fopen(file_name, "r");
     size_t sizeof_line = 0;
@@ -51,70 +49,3 @@ int parse_file(char *file_name){
     fclose(fp);
     return 1;
 }
-
-int main(int argc, char **argv){
-    if(argc != 2){
-        printf("incorrect number of arguments\n");
-        return 0;
-    }
-    parse_file(argv[1]);
-    /*char *query;
-      printf("Please input your query or multiple queries: \n");
-      scanf("%s", query);
-      printf("You entered: %s\n", query);
-      */
-    /*
-       char *str;
-
-    // Initial memory allocation
-    str = (char *) malloc(15);
-    printf("Please input your query or multiple queries: \n");
-    scanf("%s", str);
-
-    // Reallocating memory
-    str = (char *) realloc(str, strlen(str));
-    printf("You entered: %s\n", s);
-
-    free(str);
-    */
-    char* s;
-    char option[2];
-    do{
-        printf("Please input your query or hit q to exit: \n");
-        //please type sa, so or so
-        //call sa or so functions on remaining tokens if sa or so is the first token
-        //if sa/so is the only token, then continue;
-        s = calloc(1,sizeof(char)); //null string
-        char t;
-        int len;
-        while(scanf("%c", &t)==1) //scanning for input
-        {
-            if(t == '\n') break; //gets everything on line and puts it into string
-            len = strlen(s); //takes length of tring
-            s= realloc(s,len+1); //makes string 1 larger
-            *(s+len) = t; //putting the character at the last index
-            *(s+len+1) = '\0'; //inserts nullbyte after last char
-        }
-        if(strcmp(s,"q") == 0 || strcmp(s,"Q") == 0){
-            printf("Exiting\n");
-            break;
-        }
-        strncpy(option, s, 2);
-        if(strcmp(option, "so") == 0){
-            printf("OR\n");
-        }else if(strcmp(option, "sa") == 0){
-            printf("AND\n");
-        }else{
-            printf("Please enter a valid query\n");
-        }
-    }while(500 == 500);
-
-
-    free(s);
-    print_files(argv[1]);
-    return 0;
-
-}
-
-
-

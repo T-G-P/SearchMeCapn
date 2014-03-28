@@ -10,6 +10,12 @@
 #include "uthash.h"
 #include "sorted-list.h"
 
+int compareStrings(void *, void *);
+
+void destroyBasicTypeAlloc(void *);
+
+void destroyBasicTypeNoAlloc(void *);
+
 struct hash{
     char *token;          /* key */
     struct SortedList *list;  //The value is a sorted list pointer to file linked list
@@ -24,7 +30,9 @@ int token_compare(struct hash *, struct hash *);
 
 void sort_by_token(void);
 
-//void sortList(struct Node*);
+void search_or(char *);
+
+void search_and(char *);
 
 void print_files();
 

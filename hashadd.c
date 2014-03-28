@@ -56,6 +56,50 @@ void sort_by_token() {
     HASH_SORT(tokenHash, token_compare);
 }
 
+void search_or(char *input){
+    struct hash *h;
+    char *token = strtok(input," \n");
+    token = strtok(NULL," \n");
+    SortedListPtr sorted_result = SLCreate(compareStrings,destroyBasicTypeNoAlloc);
+    while(token != NULL && strlen(token) > 0){
+        //get SL of key from hash
+        HASH_FIND_STR(tokenHash, token, h);
+        if(!h){
+            printf("\nString not found\n");
+            return;
+        }
+        Node *ptr = h->list->head;
+        while(ptr){
+            SLInsert(sorted_result,token,ptr->fileName);
+            ptr = ptr->next;
+        }
+        token = strtok(NULL, " \n");
+    }
+    //print new SL
+    Node *ptr = sorted_result->head;
+    if(!ptr){
+        printf("\nActually enter a query please. ");
+        printf("Asshat.\n");
+        return;
+    }
+    printf("\nRESULT: \n");
+    while(ptr->next){
+        printf("%s, ", (char *)ptr->fileName);
+        ptr = ptr->next;
+    }
+    if(ptr){
+        printf("%s\n", (char *)ptr->fileName);
+    }
+
+    //free new SL
+    SLDestroy(sorted_result);
+}
+
+
+void search_and(char *input){
+
+}
+
 void print_files() {
     struct hash *h;
     Node *ptr;

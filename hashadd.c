@@ -120,15 +120,15 @@ void search_and(char *input){
             Node *SLptr = sorted_result->head;
             while(SLptr){
                 if(ptr) comp = strcmp(SLptr->fileName,ptr->fileName);
-                else break;
-                if(comp == 0){
-                    SLptr = SLptr->next;
+                else break;     //no more nodes to look through
+                if(comp == 0){  //if the two strings are equal
+                    SLptr = SLptr->next; //advance both pointers
                     if(ptr) ptr = ptr->next;
-                }else if(comp > 0){
-                    if(ptr) ptr = ptr->next;
+                }else if(comp > 0){     //slpointers value is bigger
+                    if(ptr) ptr = ptr->next; //advance pointers pointer
                 }else{
-                    SLptr->flag = 1;
-                    SLptr = SLptr->next;
+                    SLptr->flag = 1;        //pointers value is bigger so flag for deletion
+                    SLptr = SLptr->next;    //increment pointer for sl pointer
                 }
             }
         }
@@ -172,4 +172,3 @@ void print_files() {
         }
     }
 }
-

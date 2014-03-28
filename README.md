@@ -4,17 +4,19 @@ This takes the inverted index file output from the Indexer, parses it, stores it
 
 Directions:
 
-1)
+(1)
 make
 
-2)
+(2)
 ./search <inverted index file>
 
-3)
+(3)
+
 so (term1) (term2) (term3) etc.
 
 or
 
 sa (term1) (term2) (term3) etc.
 
-4)Hit Q to quit
+4)
+Hit q to quit

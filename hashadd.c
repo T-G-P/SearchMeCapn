@@ -98,12 +98,14 @@ void search_or(char *input){
 
 void search_and(char *input){
     struct hash *h;
-    int comp;
+    int count = 0;
+    int flag;
     char *token = strtok(input," \n");
     token = strtok(NULL," \n");
     SortedListPtr sorted_result = SLCreate(compareStrings,destroyBasicTypeNoAlloc);
     while(token != NULL && strlen(token) > 0){
         //get SL of key from hash
+        count++;
         HASH_FIND_STR(tokenHash, token, h);
         if(!h){
             printf("\nString not found\n");
@@ -111,26 +113,9 @@ void search_and(char *input){
         }
 
         Node *ptr = h->list->head;
-        if(sorted_result->head == NULL){
-            while(ptr){
-                SLInsert(sorted_result,token,ptr->fileName);
-                ptr = ptr->next;
-            }
-        }else{
-            Node *SLptr = sorted_result->head;
-            while(SLptr){
-                if(ptr) comp = strcmp(SLptr->fileName,ptr->fileName);
-                else break;
-                if(comp == 0){
-                    SLptr = SLptr->next;
-                    if(ptr) ptr = ptr->next;
-                }else if(comp > 0){
-                    if(ptr) ptr = ptr->next;
-                }else{
-                    SLptr->flag = 1;
-                    SLptr = SLptr->next;
-                }
-            }
+        while(ptr){
+            SLInsert(sorted_result,token,ptr->fileName);
+            ptr = ptr->next;
         }
         token = strtok(NULL, " \n");
     }
@@ -142,22 +127,16 @@ void search_and(char *input){
     }
     printf("\nRESULT: \n");
     while(ptr->next){
-        if(ptr->flag == 0){
-            printf("%s, ", (char *)ptr->fileName);
-        }
+        if(ptr->count == count) printf("%s, ", (char *)ptr->fileName);
         ptr = ptr->next;
     }
     if(ptr){
-        if(ptr->flag == 0){
-            printf("%s\n", (char *)ptr->fileName);
-        }
+        if(ptr->count == count) printf("%s\n", (char *)ptr->fileName);
     }
 
     //free new SL
     SLDestroy(sorted_result);
 }
-
-
 
 void print_files() {
     struct hash *h;

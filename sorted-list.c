@@ -14,7 +14,7 @@ Node *createNode(void * token, void *fileName)
     llNode->fileName = fileName;
     llNode->refCount = 0;
     llNode->next = NULL;
-    llNode->flag = 0;
+    llNode->count = 1;
     return llNode;
 }
 
@@ -82,6 +82,7 @@ int SLInsert(SortedListPtr list, void *token, void*fileName)
 
     while(ptr != NULL){
         if(list->cf(ptr->fileName, fileName) == 0){   //no duplicate insertion
+            ptr->count++;
             return 0;
         }
         else if(list->cf(ptr->fileName, fileName) > 0){ //if fileName is bigger, insert

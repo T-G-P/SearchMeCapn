@@ -13,7 +13,7 @@ struct Node_
     void *fileName;
     int refCount;
     struct Node_ *next;
-    int flag;
+    int count;
 };
 typedef struct Node_ Node;
 

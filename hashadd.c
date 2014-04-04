@@ -60,12 +60,16 @@ void search_or(char *input){
     struct hash *h;
     char *token = strtok(input," \n");
     token = strtok(NULL," \n");
+    if(token == NULL){
+        printf("Please enter an actual query.\n");
+        return;
+    }
     SortedListPtr sorted_result = SLCreate(compareStrings,destroyBasicTypeNoAlloc);
     while(token != NULL && strlen(token) > 0){
         //get SL of key from hash
         HASH_FIND_STR(tokenHash, token, h);
         if(!h){
-            printf("\nString not found\n");
+            token = strtok(NULL, " \n");
             continue;
         }
         Node *ptr = h->list->head;
@@ -78,8 +82,7 @@ void search_or(char *input){
     //print new SL
     Node *ptr = sorted_result->head;
     if(!ptr){
-        printf("\nActually enter a query please. ");
-        printf("Asshat.\n");
+        printf("\nNone of the strings found.\n ");
         return;
     }
     printf("\nRESULT: \n");
@@ -99,7 +102,6 @@ void search_or(char *input){
 void search_and(char *input){
     struct hash *h;
     int count = 0;
-    int flag;
     char *token = strtok(input," \n");
     token = strtok(NULL," \n");
     SortedListPtr sorted_result = SLCreate(compareStrings,destroyBasicTypeNoAlloc);

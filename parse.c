@@ -6,6 +6,21 @@
 #include "sorted-list.h"
 #include "hashadd.h"
 
+int iscount(char* token){
+    int count = 0;
+    int i;
+    int len = strlen(token);
+    for(i = 0; i < len; i++){
+        if(isdigit(token[i])){
+            count++;
+        }
+    }
+    if(count == len){
+        return 1;
+    }
+    return 0;
+}
+
 int parse_file(char *file_name){
     FILE *fp = fopen(file_name, "r");
     size_t sizeof_line = 0;
@@ -33,7 +48,7 @@ int parse_file(char *file_name){
             continue;                   //this hash thing is done, add node to hash here
         }else{                          //case for file names/counts
             while(token != NULL && strlen(token) > 0){
-                if(!isdigit(token[0])){
+                if(!iscount(token)){
                     //printf("This is the key: %s\n");
                     //printf("add_node is passing %s and %s as the filename\n",key,token);
                     char *file = malloc(strlen(token)*sizeof(char));   //store this token as key

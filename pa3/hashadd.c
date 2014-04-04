@@ -81,14 +81,14 @@ void print_files(char* fileName) {
     struct Node *ptr;
     FILE* fp = fopen(fileName, "w");
     for(h=tokenHash; h != NULL; h=(struct hash*)(h->hh.next)) {
-        fprintf(fp,"<list> %s\n\n", h->token);  //print the token
+        fprintf(fp,"<list> %s\n", h->token);  //print the token
         ptr = h->file;  //points to hash node
         sortList(ptr);
         while(ptr){     //while the pointer is not null
             fprintf(fp,"%s %d ", ptr->fileName, ptr->count); //then for each token print file names and count
             ptr = ptr->next;
         }
-        fprintf(fp,"\n\n</list>\n\n");
+        fprintf(fp,"\n</list>\n");
     }
 }
 
@@ -109,8 +109,8 @@ void free_list(struct Node* ptr)
 void free_all_hashes(){
     struct hash *h, *tmp;
     HASH_ITER(hh, tokenHash, h, tmp) {
-        HASH_DEL(tokenHash,h);  // delete; tokenHash advances to next 
-        free_list(h->file);            
+        HASH_DEL(tokenHash,h);  // delete; tokenHash advances to next
+        free_list(h->file);
     }
 
 }
